@@ -1,0 +1,36 @@
+@(headline: Html = Html(""))(content: Html)(implicit request: play.api.mvc.Request[Any], lang: Lang)
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="@Messages("keywords")">
+    <meta name="description" content="@Messages("description")">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <title>@Messages("title")</title>
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/font-awesome.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/select2.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/select2-bootstrap.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap-datetimepicker.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/app.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
+    <link rel="apple-touch-icon-precomposed" href="@routes.Assets.at("img/favicon.png")">
+  </head>
+  <body class="smart-style-2">
+    
+    <main class="container">
+      <h1 class="page-header">@headline</h1>
+      @content
+    </main>
+
+
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/jquery-1.11.1.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/select2.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/jquery.autogrowtextarea.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/moment.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/bootstrap-datetimepicker.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/app.js")'></script>
+  </body>
+</html>
