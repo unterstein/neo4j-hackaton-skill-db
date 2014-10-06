@@ -1,0 +1,74 @@
+@**
+* Copyright (C) 2014 Johannes Unterstein, unterstein@me.com, unterstein.info
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+
+* http://www.apache.org/licenses/LICENSE-2.0
+
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*@
+@(id: Long, form: Form[controllers.UserController.CaseUser], mode: String = "create")(implicit request: play.api.mvc.Request[Any], lang: Lang)
+
+@import neo4j.models.user.UserState
+@import neo4j.models.user.UserRole
+@import neo4j.models.user.User
+@import global.Global
+@import views.html.helper.{inputRow, textareaRow, formErrors, dropDownRow}
+
+@mainPage(Html(Messages("user." + mode + ".title"))) {
+  @helper.form(if(id >= 0) { routes.UserController.postEdit(id) } else {routes.UserController.postCreate }) {
+    @formErrors(form.asInstanceOf[Form[Any]])
+    <div class="row">
+      <div class="col-md-12">
+        @inputRow("name", "text", form.data.get("name"), form.errors("name").size > 0)
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        @inputRow("email", "email", form.data.get("email"), form.errors("email").size > 0)
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        @textareaRow("description", form.data.get("description"), form.errors("description").size > 0)
+      </div>
+    </div>
+    @if(id == 0 || PlaySession.isAdmin || PlaySession.getUser.id == id) {
+      <div class="row">
+        <div class="col-md-12">
+          @inputRow("password", "password", form.data.get("password"), form.errors("password").size > 0)
+        </div>
+      </div>
+    } else {
+      <input type="hidden" readonly="readonly" name="password" />
+    }
+    @if(PlaySession.isAdmin) {
+      <div class="row">
+        <div class="col-md-6 select2">
+          @dropDownRow("userRole", form.data.get("userRole"), form.errors("userRole").size > 0, UserRole.enumModel())
+        </div>
+        <div class="col-md-6 select2">
+          @dropDownRow("userState", form.data.get("userState"), form.errors("userState").size > 0, UserState.enumModel())
+        </div>
+      </div>
+    } else {
+      <input type="hidden" readonly="readonly" name="userRole" value="USER" />
+      <input type="hidden" readonly="readonly" name="userState" value="ACTIVE" />
+    }
+    <div class="row">
+      <div class="col-md-12">
+        <a class="btn btn-default" href="@routes.UserController.userList">@Messages("back")</a>
+        @if(id >= 0 && PlaySession.isAdmin) {
+          <a class="btn btn-danger delete" data-url="@routes.UserController.delete(id)" data-success="@routes.UserController.userList">@Messages("delete")</a>
+        }
+        <button type="submit" class="btn btn-primary pull-right">@Messages(if(id >= 0) "user.edit" else "user.create")</button>
+      </div>
+    </div>
+  }
+}

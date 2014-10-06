@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                    controllers.ApplicationController.index
+
+# Dashboard
+GET         /dashboard                           controllers.DashboardController.dashboard
+
+# User
+GET         /users                               controllers.UserController.userList
+GET         /users/create                        controllers.UserController.create
+GET         /users/edit/:id                      controllers.UserController.edit(id: Long)
+POST        /users/edit/:id/edit                 controllers.UserController.postEdit(id: Long)
+POST        /users/edit/:id/delete               controllers.UserController.delete(id: Long)
+POST        /users/postCreate                    controllers.UserController.postCreate
+
+# Admin
+GET         /admin/performance                   controllers.AdminController.performance
+GET         /admin/allperformance                controllers.AdminController.allPerformance
+GET         /admin/logs                          controllers.AdminController.logs
+GET         /admin/logs/:logLevel                controllers.AdminController.logsByLogLevel(logLevel: String)
+
+# Authentication
+GET         /login                               controllers.AuthenticationController.login
+GET         /logout                              controllers.AuthenticationController.logout
+POST        /login                               controllers.AuthenticationController.loginUser
+POST        /register                            controllers.AuthenticationController.registerUser
+GET         /register                            controllers.AuthenticationController.registerRedirect
+
+# Javascript routing
+GET         /assets/javascripts/routes.js        controllers.ApplicationController.jsRoutes
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                        controllers.Assets.at(path="/public", file)
