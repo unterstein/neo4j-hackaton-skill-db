@@ -5,7 +5,7 @@ import play.api.mvc._
 
 object ApplicationController extends Controller {
 
-  def index = Action {
+  def index = Neo4jTransactionAction {
     implicit request =>
       Ok(views.html.index())
   }
