@@ -7,7 +7,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.10.4" // TODO update to: 2.11.1, 2.10.4 is needed for neo4j-plugin
 
 libraryDependencies ++= Seq(
-  "com.github.tuxBurner" %% "play-neo4jplugin" % "1.4",
+  "com.github.tuxBurner" %% "play-neo4jplugin" % "1.4.0",
   "commons-lang" % "commons-lang" % "2.6",
   "commons-io" % "commons-io" % "2.4",
   "joda-time" % "joda-time" % "2.3",
