@@ -1,5 +1,6 @@
-package neo4j.models;
+package neo4j.models.orga;
 
+import neo4j.models.AbstractModel;
 import neo4j.relations.Relations;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.annotation.TypeAlias;
